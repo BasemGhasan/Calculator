@@ -1,0 +1,17 @@
+.input-screen, button {
+    border: solid 1px;
+    border-radius: 5px;
+    border-color: black;
+    padding: 0%;
+}
+.input-screen {
+    grid-column-start: 1;
+    grid-column-end: 6;
+    outline: 0;
+    font-size: 35px;
+    direction: rtl;
+    padding: 0px 10px;
+}
+.button {
+    cursor: pointer;
+}
