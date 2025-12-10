@@ -1,17 +1,28 @@
-.input-screen, button {
+@font-face {
+    font-family: "Digital-7";
+    src: url("../assets/fonts/digital-7.regular.ttf") format("truetype");
+}
+
+.input-screen,
+button {
     border: solid 1px;
     border-radius: 5px;
     border-color: black;
     padding: 0%;
 }
+
 .input-screen {
     grid-column-start: 1;
     grid-column-end: 6;
     outline: 0;
-    font-size: 35px;
+    font-size: 40px;
+    font-family: "Digital-7", sans-serif;
     direction: rtl;
     padding: 0px 10px;
+    background: linear-gradient(180deg, #96ce86, #51b662, #01a001, #185626);
+    box-shadow: inset 0px 4px 18px rgba(0, 0, 0, 0.5);
 }
+
 .button {
     cursor: pointer;
 }
