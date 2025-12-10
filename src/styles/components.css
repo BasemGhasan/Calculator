@@ -3,12 +3,11 @@
     src: url("../assets/fonts/digital-7.regular.ttf") format("truetype");
 }
 
-.input-screen,
-button {
-    border: solid 1px;
+.input-screen {
     border-radius: 5px;
     border-color: black;
     padding: 0%;
+    font-size: 30px;
 }
 
 .input-screen {
@@ -23,6 +22,33 @@ button {
     box-shadow: inset 0px 4px 18px rgba(0, 0, 0, 0.5);
 }
 
-.button {
+button {
     cursor: pointer;
+    border-radius: 10px;
+    font-size: 27px;
+    color: #ffffff;
+    background-color: #262626;
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.5);
+}
+
+.button0, .button1 {
+    background: #d84130; 
+}
+.button2 {
+    background: #e17f29;
+color: white;
+
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+.button17 {
+    grid-row-start: 5;
+    grid-row-end: 7;
+    grid-column-start: 4;
+}
+.button3, .button7, .button8, .button12, .button13, .button17, .button18 {
+    background-color: #686868;
+}
+.button22 {
+    background: #16a26a;
 }
