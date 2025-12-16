@@ -1,8 +1,12 @@
 import "../styles/components.css"
 
-function Screen() {
+type Props = {
+  value: string
+}
+
+function Screen({ value }: Props) {
   return (
-    <input type="text" className="input-screen"/>
+    <input type="text" className="input-screen" value={value}/>
   )
 }
 

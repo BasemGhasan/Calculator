@@ -1,9 +1,13 @@
 //import { useState } from 'react'
 import Button from "./components/button";
+import { useState } from "react";
 import Screen from "./components/screen";
 import "./styles/app.css"
 
 function Calculator() {
+
+  const [input, setInput] = useState("0");
+
   const buttons = [
     "⏻", "C", "⌫", "±", 
     "7", "8", "9", "()","%",
@@ -18,9 +22,9 @@ function Calculator() {
         <h2 className="calculator-header">Calculator</h2>
         <div className="container">
           <div className="calculator-body">
-            <Screen></Screen>
+            <Screen value={input}></Screen>
             {buttons.map((button, index) => (
-              <Button btnClass={`button${index}`}> {button} </Button>
+              <Button btnClass={`button${index}`} setInput={setInput}>{button}</Button>
             ))}
           </div>
         </div>
