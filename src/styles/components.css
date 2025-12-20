@@ -16,7 +16,7 @@
     outline: 0;
     font-size: 40px;
     font-family: "Digital-7", sans-serif;
-    direction: rtl;
+    text-align: right;
     padding: 0px 10px;
     background: linear-gradient(180deg, #96ce86, #51b662, #01a001, #185626);
     box-shadow: inset 0px 4px 18px rgba(0, 0, 0, 0.5);
@@ -31,24 +31,35 @@ button {
     box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.5);
 }
 
-.button0, .button1 {
-    background: #d84130; 
+.button0,
+.button1 {
+    background: #d84130;
 }
+
 .button2 {
     background: #e17f29;
-color: white;
+    color: white;
 
     grid-column-start: 3;
     grid-column-end: 5;
 }
+
 .button17 {
     grid-row-start: 5;
     grid-row-end: 7;
     grid-column-start: 4;
 }
-.button3, .button7, .button8, .button12, .button13, .button17, .button18 {
+
+.button3,
+.button7,
+.button8,
+.button12,
+.button13,
+.button17,
+.button18 {
     background-color: #686868;
 }
+
 .button22 {
     background: #16a26a;
 }
