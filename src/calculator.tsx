@@ -8,6 +8,7 @@ function Calculator() {
 
   const [input, setInput] = useState("0");
   const [openBracket, setOpenBracket] = useState(false);
+  const [theme, setTheme] = useState("On");
 
   const buttons = [
     "⏻", "C", "⌫", "±",
@@ -23,7 +24,9 @@ function Calculator() {
   }
 
   const handleButton = (label: string) => {
-    setInput(prev => {
+    if (label === '⏻') {reset(); setTheme(prev => (prev === "On" ? "Off" : "On"));}
+    if (theme === 'On' && label !== '⏻') {
+      setInput(prev => {
       if (label === 'C') { reset(); return '0'; }
       if (label === '⌫') {
         if (prev.endsWith('(') || prev.endsWith(')')) {
@@ -40,6 +43,7 @@ function Calculator() {
       if (prev === '0') return label === '00' ? '0' : label;
       return prev + label;
     });
+    }
   };
 
   const handleBracket = () => {
@@ -79,7 +83,7 @@ function Calculator() {
         <h2 className="calculator-header">Calculator</h2>
         <div className="container">
           <div className="calculator-body">
-            <Screen value={input}></Screen>
+            <Screen value={input} theme={theme}></Screen>
             {buttons.map((button, index) => (
               <Button
                 key={index}

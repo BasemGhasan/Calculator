@@ -3,11 +3,12 @@
     src: url("../assets/fonts/digital-7.regular.ttf") format("truetype");
 }
 
-.input-screen {
-    border-radius: 5px;
-    border-color: black;
-    padding: 0%;
-    font-size: 30px;
+[screen-theme="On"] {
+    --screen-background-color: linear-gradient(180deg, #96ce86, #51b662, #01a001, #185626);
+}
+
+[screen-theme="Off"] {
+    --screen-background-color: #000000;
 }
 
 .input-screen {
@@ -18,7 +19,7 @@
     font-family: "Digital-7", sans-serif;
     text-align: right;
     padding: 0px 10px;
-    background: linear-gradient(180deg, #96ce86, #51b662, #01a001, #185626);
+    background: var(--screen-background-color);
     box-shadow: inset 0px 4px 18px rgba(0, 0, 0, 0.5);
 }
 
