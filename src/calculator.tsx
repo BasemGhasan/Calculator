@@ -1,4 +1,4 @@
-//import { useState } from 'react'
+import * as math from "mathjs";
 import Button from "./components/button";
 import { useState } from "react";
 import Screen from "./components/screen";
@@ -27,24 +27,37 @@ function Calculator() {
     if (label === '⏻') {reset(); setTheme(prev => (prev === "On" ? "Off" : "On"));}
     if (theme === 'On' && label !== '⏻') {
       setInput(prev => {
-      if (label === 'C') { reset(); return '0'; }
-      if (label === '⌫') {
-        if (prev.endsWith('(') || prev.endsWith(')')) {
-          setOpenBracket(!openBracket);
+        if (prev === 'Error' || prev === 'Infinity') return '0';
+        if (label === '=') return handleCalculations(prev);
+        if (label === 'C') { reset(); return '0'; }
+        if (label === '⌫') {
+          if (prev.endsWith('(') || prev.endsWith(')')) {
+            setOpenBracket(!openBracket);
+          }
+          return prev.length <= 1 ? '0' : prev.slice(0, -1);
         }
-        return prev.length <= 1 ? '0' : prev.slice(0, -1);
-      }
-      if (label === '±') return prev === '0' ? '0' : handleSignToggle(prev);
-      if (label === '.') return prev.includes('.') ? prev : prev + label;
-      if (label === '()') {
-        const bracket = handleBracket();
-        return prev === '0' ? bracket : prev + bracket;
-      }
-      if (prev === '0') return label === '00' ? '0' : label;
-      return prev + label;
-    });
+        if (label === '±') return prev === '0' ? '0' : handleSignToggle(prev);
+        if (label === '.') return prev.includes('.') ? prev : prev + label;
+        if (label === '()') {
+          const bracket = handleBracket();
+          return prev === '0' ? bracket : prev + bracket;
+        }
+        if (prev === '0') return label === '00' ? '0' : label;
+        return prev + label;
+      });
     }
   };
+
+  const handleCalculations = (expression: string) => {
+    try {
+    const sanitized = expression.replace(/x/g, '*');
+    const result = math.evaluate(sanitized);
+    return result.toString();
+    } catch (error) {
+      console.log(error);
+      return 'Error';
+    }
+  }
 
   const handleBracket = () => {
     if (!openBracket) {
@@ -57,8 +70,12 @@ function Calculator() {
     }
   }
 
+  const tokenization = (str: string) => {
+    return str.match(/(\d+(\.\d+)?|[+\-x/()])/g);
+  }
+
   const handleSignToggle = (prev: string) => {
-    const tokens = prev.match(/(\d+(\.\d+)?|[+\-x/()])/g);
+    const tokens = tokenization(prev);
     if (!tokens) return prev;
     const index = tokens.length - 1;
     if (/[+\-x/()]/.test(tokens[index])) {
