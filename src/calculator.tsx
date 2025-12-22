@@ -27,21 +27,13 @@ function Calculator() {
     if (label === '⏻') { reset(); setTheme(prev => (prev === "On" ? "Off" : "On")); }
     if (theme === 'On' && label !== '⏻') {
       setInput(prev => {
-        if (prev === 'Error' || prev === 'Infinity') return '0';
+        if (prev === 'Error' || prev === 'Infinity') return label;
         if (label === '=') return handleCalculations(prev);
         if (label === 'C') { reset(); return '0'; }
-        if (label === '⌫') {
-          if (prev.endsWith('(') || prev.endsWith(')')) {
-            setOpenBracket(!openBracket);
-          }
-          return prev.length <= 1 ? '0' : prev.slice(0, -1);
-        }
+        if (label === '⌫') return handleDeletion(prev);
         if (label === '±') return prev === '0' ? '0' : handleSignToggle(prev);
         if (label === '.') return handleDots(prev, label);
-        if (label === '()') {
-          const bracket = handleBracket();
-          return prev === '0' ? bracket : prev + bracket;
-        }
+        if (label === '()') return prev === '0' ? handleBracket() : prev + handleBracket();
         if (prev === '0') return label === '00' ? '0' : label;
         return handleExpressions(prev, label);
       });
@@ -57,6 +49,13 @@ function Calculator() {
       console.log(error);
       return 'Error';
     }
+  }
+
+  const handleDeletion = (prev: string) => {
+    if (prev.endsWith('(') || prev.endsWith(')')) {
+      setOpenBracket(!openBracket);
+    }
+    return prev.length <= 1 ? '0' : prev.slice(0, -1);
   }
 
   const handleBracket = () => {
@@ -111,7 +110,7 @@ function Calculator() {
     const lastIndex = tokens.length - 1;
     const lastToken = tokens[lastIndex];
     const isOperator = (s: string) => /[+\-x/%]/.test(s);
-    
+
     if (isOperator(label) && isOperator(lastToken)) {
       tokens[lastIndex] = label;
       return tokens.join('');
