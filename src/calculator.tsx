@@ -43,7 +43,7 @@ function Calculator() {
           return prev === '0' ? bracket : prev + bracket;
         }
         if (prev === '0') return label === '00' ? '0' : label;
-        return prev + label;
+        return handleExpressions(prev, label);
       });
     }
   };
@@ -103,6 +103,20 @@ function Calculator() {
       return tokens[lastIndex].includes('.') ? prev : prev + label;
     }
     return prev;
+  }
+
+  const handleExpressions = (prev: string, label: string) => {
+    const tokens = tokenization(prev);
+    if (!tokens) return prev;
+    const lastIndex = tokens.length - 1;
+    const lastToken = tokens[lastIndex];
+    const isOperator = (s: string) => /[+\-x/%]/.test(s);
+    
+    if (isOperator(label) && isOperator(lastToken)) {
+      tokens[lastIndex] = label;
+      return tokens.join('');
+    }
+    return prev + label;
   }
 
   return (
