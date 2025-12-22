@@ -24,7 +24,7 @@ function Calculator() {
   }
 
   const handleButton = (label: string) => {
-    if (label === '⏻') {reset(); setTheme(prev => (prev === "On" ? "Off" : "On"));}
+    if (label === '⏻') { reset(); setTheme(prev => (prev === "On" ? "Off" : "On")); }
     if (theme === 'On' && label !== '⏻') {
       setInput(prev => {
         if (prev === 'Error' || prev === 'Infinity') return '0';
@@ -37,7 +37,7 @@ function Calculator() {
           return prev.length <= 1 ? '0' : prev.slice(0, -1);
         }
         if (label === '±') return prev === '0' ? '0' : handleSignToggle(prev);
-        if (label === '.') return prev.includes('.') ? prev : prev + label;
+        if (label === '.') return handleDots(prev, label);
         if (label === '()') {
           const bracket = handleBracket();
           return prev === '0' ? bracket : prev + bracket;
@@ -50,9 +50,9 @@ function Calculator() {
 
   const handleCalculations = (expression: string) => {
     try {
-    const sanitized = expression.replace(/x/g, '*');
-    const result = math.evaluate(sanitized);
-    return result.toString();
+      const sanitized = expression.replace(/x/g, '*');
+      const result = math.evaluate(sanitized);
+      return result.toString();
     } catch (error) {
       console.log(error);
       return 'Error';
@@ -71,27 +71,38 @@ function Calculator() {
   }
 
   const tokenization = (str: string) => {
-    return str.match(/(\d+(\.\d+)?|[+\-x/()])/g);
+    return str.match(/(\d+\.?\d*|[+\-x/()])/g);
   }
 
   const handleSignToggle = (prev: string) => {
     const tokens = tokenization(prev);
     if (!tokens) return prev;
-    const index = tokens.length - 1;
-    if (/[+\-x/()]/.test(tokens[index])) {
+    const lastIndex = tokens.length - 1;
+    if (/[+\-x/()]/.test(tokens[lastIndex])) {
       if (
-        tokens[index] === ')' &&
-        tokens[index - 2] === '(' &&
-        tokens[index - 3] === '-') {
-          tokens.splice(index - 3, 4, tokens[index - 1]);
+        tokens[lastIndex] === ')' &&
+        tokens[lastIndex - 2] === '(' &&
+        tokens[lastIndex - 3] === '-') {
+        tokens.splice(lastIndex - 3, 4, tokens[lastIndex - 1]);
       }
-      else{
+      else {
         return prev;
       }
     } else {
-      tokens[index] = `-(${tokens[index]})`;
+      tokens[lastIndex] = `-(${tokens[lastIndex]})`;
     }
     return tokens.join('');
+  }
+
+  const handleDots = (prev: string, label: string) => {
+    const tokens = tokenization(prev);
+    if (!tokens) return prev;
+    const lastIndex = tokens?.length - 1;
+    const lastInput = Number(tokens[lastIndex]);
+    if (Number.isInteger(lastInput)) {
+      return tokens[lastIndex].includes('.') ? prev : prev + label;
+    }
+    return prev;
   }
 
   return (
