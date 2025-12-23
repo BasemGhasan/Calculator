@@ -42,4 +42,4 @@ npm start
 
 ## 🌐 Live Demo
 
-Experience the project live at:
+Experience the project live at: https://BasemGhasan.github.io/Calculator/
