@@ -1,73 +1,45 @@
-# React + TypeScript + Vite
+# Calculator App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple calculator built with React, TypeScript, and Vite, featuring a classic digital style with realistic styling and a retro aesthetic.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Basic arithmetic operations: addition, subtraction, multiplication, division
+- Brackets and sign toggle functionality
+- Decimal point support
+- Error handling for invalid expressions
+- Power on/off toggle
+- Responsive design with digital font
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Language**: TypeScript
+- **Framework**: React
+- **Build Tool**: Vite
+- **Library**: mathjs (for mathematical expression evaluation)
+- **Styling**: CSS with custom digital font
+- **Linting**: ESLint
 
-## Expanding the ESLint configuration
+## Screenshots
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+<img src="./src/assets/images/Screenshot_1.png" width="48%"> <img src="./src/assets/images/Screenshot_2.png" width="48%">
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Clone the repository:
+```bash
+git clone https://github.com/BasemGhasan/Calculator.git
+```
+2. Install dependencies:
+```bash
+npm install
+```
+3. Run the development server:
+```bash
+npm start
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🌐 Live Demo
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Experience the project live at:

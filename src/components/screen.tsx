@@ -7,7 +7,7 @@ type Props = {
 
 function Screen({ value, theme }: Props) {
   return (
-    <input type="text" className="input-screen" value={value} screen-theme={theme}/>
+    <input type="text" className="input-screen" value={value} screen-theme={theme} readOnly/>
   )
 }
 
