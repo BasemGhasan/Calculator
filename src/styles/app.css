@@ -1,4 +1,4 @@
-body{
+body {
   margin: 0;
 }
 
@@ -8,9 +8,14 @@ body{
   align-items: center;
   background: linear-gradient(60deg, #100664, #7231bd);
   background-size: 200% 200%;
-  height: 100dvh;
+  min-height: 100vh;
+  height: 100%;
   width: 100%;
   animation: gradient-shift 8s linear infinite;
+
+  /* Prevent iPhone top/bottom white space */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .calculator {
@@ -48,15 +53,19 @@ body{
   0% {
     background-position: 0% 0%;
   }
+
   25% {
     background-position: 50% 0%;
   }
+
   50% {
     background-position: 50% 50%;
   }
+
   75% {
     background-position: 0% 50%;
   }
+
   100% {
     background-position: 0% 0%;
   }
